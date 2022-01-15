@@ -1,5 +1,9 @@
 import * as api from "../api";
-import { GET_EMPLOYEES, DELETE_EMPLOYEES } from "../constants/actionTypes";
+import {
+  GET_EMPLOYEES,
+  DELETE_EMPLOYEE,
+  EDIT_EMPLOYEE,
+} from "../constants/actionTypes";
 
 export const getEmployees = () => async (dispatch) => {
   try {
@@ -12,5 +16,9 @@ export const getEmployees = () => async (dispatch) => {
 };
 
 export const deleteEmployee = (id) => (dispatch) => {
-  dispatch({ type: DELETE_EMPLOYEES, payload: id });
+  dispatch({ type: DELETE_EMPLOYEE, payload: id });
+};
+
+export const editEmployee = (employee) => (dispatch) => {
+  dispatch({ type: EDIT_EMPLOYEE, payload: employee });
 };

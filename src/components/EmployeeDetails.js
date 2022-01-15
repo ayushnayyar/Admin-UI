@@ -6,7 +6,7 @@ import "../styles/employee-details.scss";
 import PaginationBar from "./PaginationBar";
 
 const pageDataLimit = 10;
-const pageLimit = 5;
+const pageNumberLimit = 5;
 
 const EmployeeDetails = ({ employees, searchText }) => {
   const dispatch = useDispatch();
@@ -71,9 +71,11 @@ const EmployeeDetails = ({ employees, searchText }) => {
     console.log("Page: ", page);
 
     // Get pagination group
-    let start = Math.floor((page - 1) / pageLimit) * pageLimit;
+    let start = Math.floor((page - 1) / pageNumberLimit) * pageNumberLimit;
     setPaginationGroup(
-      new Array(pageLimit).fill().map((_, idx) => start + idx + 1)
+      Array(pageNumberLimit)
+        .fill()
+        .map((_, idx) => start + idx + 1)
     );
   }, [page, employees]);
 

@@ -25,7 +25,7 @@ const PaginationBar = ({
         <button
           disabled={page === 1}
           className="pagination__button"
-          onClick={goToPreviousPage}
+          onClick={goToNextPage}
         >
           {"<"}
         </button>
@@ -44,7 +44,7 @@ const PaginationBar = ({
             </button>
           );
         })}
-        <button className="pagination__button" onClick={goToNextPage}>
+        <button className="pagination__button" onClick={goToPreviousPage}>
           {">"}
         </button>
         <button className="pagination__button" onClick={goToLastPage}>
