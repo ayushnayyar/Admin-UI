@@ -20,7 +20,7 @@ const TableDetailRow = ({
           name={empId}
           value={empId}
           checked={checked[index]}
-          onChange={() => handleCheck(index)}
+          onChange={(event) => handleCheck(event, index)}
         />
       </td>
       <td>{empName}</td>
