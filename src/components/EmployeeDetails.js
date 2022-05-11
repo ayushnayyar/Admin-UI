@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { batchDeleteEmployees, deleteEmployee } from "../actions/employees";
-import "../styles/employee-details.scss";
+import { batchDeleteEmployees } from "../actions/employees";
+import EmployeeDetailsTable from "./EmployeeDetailsTable";
 import PaginationBar from "./PaginationBar";
-import TableDetailRow from "./TableDetailRow";
+
+import "../styles/employee-details.scss";
 
 const pageDataLimit = 10;
 const paginationLimit = 5;
@@ -14,12 +15,12 @@ const EmployeeDetails = ({ employees, searchText }) => {
   const initialCheckBoxState = Array(pageDataLimit).fill(false);
 
   const [filteredEmployees, setFilteredEmployees] = useState([]);
+  const [paginatedData, setPaginatedData] = useState([]);
+  const [paginationGroup, setPaginationGroup] = useState([]);
   const [page, setPage] = useState(1);
   const [checked, setChecked] = useState(initialCheckBoxState);
   const [allChecked, setAllChecked] = useState(false);
   const [selectedEmployeeIds, setSelectedEmployeeIds] = useState([]);
-  const [paginatedData, setPaginatedData] = useState([]);
-  const [paginationGroup, setPaginationGroup] = useState([]);
 
   const lastPage = Math.ceil(filteredEmployees.length / pageDataLimit);
 
@@ -135,56 +136,13 @@ const EmployeeDetails = ({ employees, searchText }) => {
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={allChecked}
-                onChange={handleAllChecked}
-              />
-            </th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedData.map((employee, index) => {
-            const empName = employee.name;
-            const empRole =
-              employee.role.charAt(0).toUpperCase() + employee.role.slice(1);
-            const empEmail = employee.email;
-
-            const lowerCaseSearchText = searchText.toLowerCase();
-
-            if (
-              empName.toLowerCase().search(lowerCaseSearchText) >= 0 ||
-              empRole.toLowerCase().search(lowerCaseSearchText) >= 0 ||
-              empEmail.toLowerCase().search(lowerCaseSearchText) >= 0
-            ) {
-              return (
-                <TableDetailRow
-                  key={employee.id}
-                  empId={employee.id}
-                  empName={empName}
-                  empRole={empRole}
-                  empEmail={empEmail}
-                  checked={checked}
-                  index={index}
-                  handleCheck={handleCheck}
-                  dispatch={dispatch}
-                  deleteEmployee={deleteEmployee}
-                />
-              );
-            }
-
-            return <></>;
-          })}
-        </tbody>
-      </table>
+      <EmployeeDetailsTable
+        paginatedData={paginatedData}
+        checked={checked}
+        allChecked={allChecked}
+        handleCheck={handleCheck}
+        handleAllChecked={handleAllChecked}
+      />
       <PaginationBar
         page={page}
         paginationGroup={paginationGroup}

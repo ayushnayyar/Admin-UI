@@ -1,16 +1,18 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteEmployee } from "../actions/employees";
 
-const TableDetailRow = ({
+const EmployeeDetailsRow = ({
   empId,
+  index,
   empName,
   empRole,
   empEmail,
   checked,
-  index,
   handleCheck,
-  dispatch,
-  deleteEmployee,
 }) => {
+  const dispatch = useDispatch();
+
   return (
     <tr>
       <td>
@@ -34,4 +36,4 @@ const TableDetailRow = ({
   );
 };
 
-export default TableDetailRow;
+export default EmployeeDetailsRow;
