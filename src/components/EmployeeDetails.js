@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { deleteEmployee } from "../actions/employees";
 import "../styles/employee-details.scss";
 import PaginationBar from "./PaginationBar";
+import TableDetailRow from "./TableDetailRow";
 
 const pageDataLimit = 10;
 const pageNumberLimit = 5;
@@ -13,8 +14,10 @@ const EmployeeDetails = ({ employees, searchText }) => {
   const lastPage = Math.ceil(employees.length / pageDataLimit);
 
   const [page, setPage] = useState(1);
-  const [checked, setChecked] = useState(false);
-  const [allChecked, setAllChecked] = useState(false);
+  const [checked, setChecked] = useState(Array(pageDataLimit).fill(false));
+  const [allChecked, setAllChecked] = useState(
+    checked.filter((check) => check).length === checked.length
+  );
   const [paginatedData, setPaginatedData] = useState([]);
   const [paginationGroup, setPaginationGroup] = useState([]);
 
@@ -51,13 +54,17 @@ const EmployeeDetails = ({ employees, searchText }) => {
     }
   };
 
-  const handleCheck = () => {
-    setChecked(!checked);
+  // Handling checkbox functionality
+  const handleCheck = (checkedIndex) => {
+    const updatedCheckedState = checked.map((check, index) =>
+      index === checkedIndex ? !check : check
+    );
+    setChecked(updatedCheckedState);
   };
 
   const handleAllChecked = () => {
+    setChecked(Array(pageDataLimit).fill(!allChecked));
     setAllChecked(!allChecked);
-    setChecked(allChecked);
   };
 
   useEffect(() => {
@@ -84,7 +91,7 @@ const EmployeeDetails = ({ employees, searchText }) => {
             <th>
               <input
                 type="checkbox"
-                defaultChecked={allChecked}
+                checked={allChecked}
                 onChange={handleAllChecked}
               />
             </th>
@@ -95,7 +102,7 @@ const EmployeeDetails = ({ employees, searchText }) => {
           </tr>
         </thead>
         <tbody>
-          {paginatedData.map((employee) => {
+          {paginatedData.map((employee, index) => {
             const empName = employee.name;
             const empRole =
               employee.role.charAt(0).toUpperCase() + employee.role.slice(1);
@@ -109,26 +116,18 @@ const EmployeeDetails = ({ employees, searchText }) => {
               empEmail.toLowerCase().search(lowerCaseSearchText) >= 0
             ) {
               return (
-                <tr key={employee.id}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      defaultChecked={checked}
-                      onChange={() => handleCheck}
-                    />
-                  </td>
-                  <td>{empName}</td>
-                  <td>{empEmail}</td>
-                  <td>{empRole}</td>
-                  <td>
-                    <button>Edit</button>{" "}
-                    <button
-                      onClick={() => dispatch(deleteEmployee(employee.id))}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
+                <TableDetailRow
+                  key={Math.random()}
+                  empId={employee.id}
+                  empName={empName}
+                  empRole={empRole}
+                  empEmail={empEmail}
+                  checked={checked}
+                  index={index}
+                  handleCheck={handleCheck}
+                  dispatch={dispatch}
+                  deleteEmployee={deleteEmployee}
+                />
               );
             }
 
