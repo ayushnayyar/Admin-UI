@@ -144,6 +144,7 @@ const EmployeeDetails = ({ employees, searchText }) => {
         goToPreviousPage={goToPreviousPage}
         goToLastPage={goToLastPage}
         changePage={changePage}
+        lastPage={lastPage}
       />
     </div>
   );

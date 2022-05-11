@@ -10,6 +10,7 @@ const PaginationBar = ({
   goToLastPage,
   changePage,
   page,
+  lastPage,
 }) => {
   return (
     <div className="pagination__bar">
@@ -44,10 +45,18 @@ const PaginationBar = ({
             </button>
           );
         })}
-        <button className="pagination__button" onClick={goToNextPage}>
+        <button
+          disabled={page === lastPage}
+          className="pagination__button"
+          onClick={goToNextPage}
+        >
           {">"}
         </button>
-        <button className="pagination__button" onClick={goToLastPage}>
+        <button
+          disabled={page === lastPage}
+          className="pagination__button"
+          onClick={goToLastPage}
+        >
           {">>"}
         </button>
       </div>
