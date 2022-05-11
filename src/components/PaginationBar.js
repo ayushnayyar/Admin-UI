@@ -25,7 +25,7 @@ const PaginationBar = ({
         <button
           disabled={page === 1}
           className="pagination__button"
-          onClick={goToNextPage}
+          onClick={goToPreviousPage}
         >
           {"<"}
         </button>
@@ -33,7 +33,7 @@ const PaginationBar = ({
           return (
             <button
               className={`pagination__button ${
-                page === pageIndex ? "pagination__button__active" : null
+                page === pageIndex ? "pagination__button__active" : ""
               }`}
               key={pageIndex}
               onClick={(event) => {
@@ -44,7 +44,7 @@ const PaginationBar = ({
             </button>
           );
         })}
-        <button className="pagination__button" onClick={goToPreviousPage}>
+        <button className="pagination__button" onClick={goToNextPage}>
           {">"}
         </button>
         <button className="pagination__button" onClick={goToLastPage}>

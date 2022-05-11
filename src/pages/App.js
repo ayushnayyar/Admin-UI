@@ -17,8 +17,6 @@ const App = () => {
     setSearchText(searchTerm);
   };
 
-  console.log(employees);
-
   useEffect(() => {
     dispatch(getEmployees());
   }, [dispatch]);

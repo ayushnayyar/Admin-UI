@@ -20,10 +20,7 @@ const EmployeeDetails = ({ employees, searchText }) => {
 
   const changePage = (event) => {
     const pageIndex = event.target.textContent;
-    console.log(pageIndex);
-    setPage(pageIndex);
-    // console.log(page);
-    // getPaginatedData();
+    setPage(parseInt(pageIndex));
   };
 
   const goToFirstPage = () => {
@@ -33,9 +30,9 @@ const EmployeeDetails = ({ employees, searchText }) => {
   };
 
   const goToNextPage = () => {
-    console.log(lastPage);
     if (page !== lastPage) {
       const nextPage = page + 1;
+      console.log(nextPage);
       setPage(nextPage);
     }
   };
@@ -68,7 +65,6 @@ const EmployeeDetails = ({ employees, searchText }) => {
     const endIndex = startIndex + pageDataLimit;
 
     setPaginatedData(employees.slice(startIndex, endIndex));
-    console.log("Page: ", page);
 
     // Get pagination group
     let start = Math.floor((page - 1) / pageNumberLimit) * pageNumberLimit;
