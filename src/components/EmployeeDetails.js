@@ -7,7 +7,7 @@ import PaginationBar from "./PaginationBar";
 import TableDetailRow from "./TableDetailRow";
 
 const pageDataLimit = 10;
-const pageNumberLimit = 5;
+const paginationLimit = 5;
 
 const EmployeeDetails = ({ employees, searchText }) => {
   const dispatch = useDispatch();
@@ -91,14 +91,18 @@ const EmployeeDetails = ({ employees, searchText }) => {
     setPaginatedData(filteredEmployees.slice(startIndex, endIndex));
 
     // Get pagination group
-    let start = Math.floor((page - 1) / pageNumberLimit) * pageNumberLimit;
+    const start = Math.floor((page - 1) / paginationLimit) * paginationLimit;
+    const numberOfPages = Math.ceil(filteredEmployees.length / pageDataLimit);
+    const finalNumOfPages =
+      paginationLimit > numberOfPages ? numberOfPages : paginationLimit;
     setPaginationGroup(
-      Array(pageNumberLimit)
+      Array(finalNumOfPages)
         .fill()
         .map((_, index) => start + index + 1)
     );
   }, [page, filteredEmployees, searchText]);
 
+  // Filter on search
   useEffect(() => {
     if (searchText.length) {
       const lowerCaseSearchText = searchText.toLowerCase();
