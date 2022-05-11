@@ -11,10 +11,17 @@ const PaginationBar = ({
   changePage,
   page,
   lastPage,
+  checked,
+  deleteSelected,
 }) => {
   return (
     <div className="pagination__bar">
-      <button>Delete Selected</button>
+      <button
+        disabled={checked.filter((check) => check === true).length === 0}
+        onClick={deleteSelected}
+      >
+        Delete Selected
+      </button>
       <div className="pagination__buttons">
         <button
           disabled={page === 1}

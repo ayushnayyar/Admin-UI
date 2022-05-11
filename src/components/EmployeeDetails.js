@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { deleteEmployee } from "../actions/employees";
+import { batchDeleteEmployees, deleteEmployee } from "../actions/employees";
 import "../styles/employee-details.scss";
 import PaginationBar from "./PaginationBar";
 import TableDetailRow from "./TableDetailRow";
@@ -12,9 +12,10 @@ const pageNumberLimit = 5;
 const EmployeeDetails = ({ employees, searchText }) => {
   const dispatch = useDispatch();
   const lastPage = Math.ceil(employees.length / pageDataLimit);
+  const initialCheckBoxState = Array(pageDataLimit).fill(false);
 
   const [page, setPage] = useState(1);
-  const [checked, setChecked] = useState(Array(pageDataLimit).fill(false));
+  const [checked, setChecked] = useState(initialCheckBoxState);
   const [allChecked, setAllChecked] = useState(
     checked.filter((check) => check).length === checked.length
   );
@@ -36,7 +37,6 @@ const EmployeeDetails = ({ employees, searchText }) => {
   const goToNextPage = () => {
     if (page !== lastPage) {
       const nextPage = page + 1;
-      console.log(nextPage);
       setPage(nextPage);
     }
   };
@@ -67,6 +67,19 @@ const EmployeeDetails = ({ employees, searchText }) => {
     setAllChecked(!allChecked);
   };
 
+  // Delete selected employees functionality
+  const deleteSelected = () => {
+    checked.forEach((check, index) => {
+      if (check) {
+        const empId = index + (page - 1) * pageDataLimit;
+        dispatch(deleteEmployee(employees[empId].id));
+        setChecked(initialCheckBoxState);
+        setAllChecked(false);
+      }
+    });
+  };
+
+  // Get/update employee data
   useEffect(() => {
     // Get Paginated data
     const startIndex = page * pageDataLimit - pageDataLimit;
@@ -82,6 +95,13 @@ const EmployeeDetails = ({ employees, searchText }) => {
         .map((_, idx) => start + idx + 1)
     );
   }, [page, employees]);
+
+  // Keep track if all checkboxes are checked
+  useEffect(() => {
+    const areAllChecked = checked.every((check) => check === true);
+
+    setAllChecked(areAllChecked);
+  }, [checked]);
 
   return (
     <div>
@@ -144,6 +164,8 @@ const EmployeeDetails = ({ employees, searchText }) => {
         goToLastPage={goToLastPage}
         changePage={changePage}
         lastPage={lastPage}
+        checked={checked}
+        deleteSelected={deleteSelected}
       />
     </div>
   );
