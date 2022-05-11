@@ -2,6 +2,7 @@ import * as api from "../api";
 import {
   GET_EMPLOYEES,
   DELETE_EMPLOYEE,
+  BATCH_DELETE_EMPLOYEES,
   EDIT_EMPLOYEE,
 } from "../constants/actionTypes";
 
@@ -17,6 +18,10 @@ export const getEmployees = () => async (dispatch) => {
 
 export const deleteEmployee = (id) => (dispatch) => {
   dispatch({ type: DELETE_EMPLOYEE, payload: id });
+};
+
+export const batchDeleteEmployees = (idList) => (dispatch) => {
+  dispatch({ type: BATCH_DELETE_EMPLOYEES, payload: idList });
 };
 
 export const editEmployee = (employee) => (dispatch) => {

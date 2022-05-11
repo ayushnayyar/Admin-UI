@@ -69,14 +69,17 @@ const EmployeeDetails = ({ employees, searchText }) => {
 
   // Delete selected employees functionality
   const deleteSelected = () => {
+    const selectedEmployeeIds = [];
     checked.forEach((check, index) => {
       if (check) {
         const empId = index + (page - 1) * pageDataLimit;
-        dispatch(deleteEmployee(employees[empId].id));
-        setChecked(initialCheckBoxState);
-        setAllChecked(false);
+        selectedEmployeeIds.push(employees[empId].id);
       }
     });
+
+    dispatch(batchDeleteEmployees(selectedEmployeeIds));
+    setChecked(initialCheckBoxState);
+    setAllChecked(false);
   };
 
   // Get/update employee data
@@ -84,7 +87,6 @@ const EmployeeDetails = ({ employees, searchText }) => {
     // Get Paginated data
     const startIndex = page * pageDataLimit - pageDataLimit;
     const endIndex = startIndex + pageDataLimit;
-
     setPaginatedData(employees.slice(startIndex, endIndex));
 
     // Get pagination group
@@ -99,7 +101,6 @@ const EmployeeDetails = ({ employees, searchText }) => {
   // Keep track if all checkboxes are checked
   useEffect(() => {
     const areAllChecked = checked.every((check) => check === true);
-
     setAllChecked(areAllChecked);
   }, [checked]);
 
