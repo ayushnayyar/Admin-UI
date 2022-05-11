@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import EmployeeDetails from "../components/EmployeeDetails";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getEmployees } from "../actions/employees";
 import "../styles/app.scss";

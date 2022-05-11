@@ -18,6 +18,7 @@ const EmployeeDetails = ({ employees, searchText }) => {
   const [paginatedData, setPaginatedData] = useState([]);
   const [paginationGroup, setPaginationGroup] = useState([]);
 
+  // Pagination Functions
   const changePage = (event) => {
     const pageIndex = event.target.textContent;
     setPage(parseInt(pageIndex));
@@ -95,13 +96,17 @@ const EmployeeDetails = ({ employees, searchText }) => {
         </thead>
         <tbody>
           {paginatedData.map((employee) => {
-            const role =
+            const empName = employee.name;
+            const empRole =
               employee.role.charAt(0).toUpperCase() + employee.role.slice(1);
+            const empEmail = employee.email;
+
+            const lowerCaseSearchText = searchText.toLowerCase();
 
             if (
-              employee.name.search(searchText) >= 0 ||
-              employee.role.search(searchText) >= 0 ||
-              employee.email.search(searchText) >= 0
+              empName.toLowerCase().search(lowerCaseSearchText) >= 0 ||
+              empRole.toLowerCase().search(lowerCaseSearchText) >= 0 ||
+              empEmail.toLowerCase().search(lowerCaseSearchText) >= 0
             ) {
               return (
                 <tr key={employee.id}>
@@ -112,9 +117,9 @@ const EmployeeDetails = ({ employees, searchText }) => {
                       onChange={() => handleCheck}
                     />
                   </td>
-                  <td>{employee.name}</td>
-                  <td>{employee.email}</td>
-                  <td>{role}</td>
+                  <td>{empName}</td>
+                  <td>{empEmail}</td>
+                  <td>{empRole}</td>
                   <td>
                     <button>Edit</button>{" "}
                     <button
