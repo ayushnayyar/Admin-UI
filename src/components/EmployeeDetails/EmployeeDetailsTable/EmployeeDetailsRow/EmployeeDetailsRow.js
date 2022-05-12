@@ -28,7 +28,7 @@ const EmployeeDetailsRow = ({
   });
   const [tempFormData, setTempFormData] = useState(formData);
 
-  const handleEditClick = () => {
+  const handleEditOrSaveClick = () => {
     if (editMode) {
       dispatch(editEmployee(formData));
     }
@@ -36,9 +36,13 @@ const EmployeeDetailsRow = ({
     setEditMode(!editMode);
   };
 
-  const handleCancel = () => {
-    setFormData(tempFormData);
-    setEditMode(!editMode);
+  const handleDeleteOrCancelClick = () => {
+    if (!editMode) {
+      dispatch(deleteEmployee(empId));
+    } else {
+      setFormData(tempFormData);
+      setEditMode(!editMode);
+    }
   };
 
   return (
@@ -88,11 +92,20 @@ const EmployeeDetailsRow = ({
           updateValue={(newRole) => setFormData({ ...formData, role: newRole })}
         />
       </td>
-      <td className="table__row-action table__row-padding">
-        <button onClick={handleEditClick}>{editMode ? "Save" : "Edit"}</button>
+      <td className="table__row-actions table__row-padding">
+        <button
+          className={"table__row-action table__row-action-edit"}
+          onClick={handleEditOrSaveClick}
+        >
+          {editMode ? "Save" : "Edit"}
+        </button>
         &nbsp;
-        {editMode ? <button onClick={handleCancel}>Cancel</button> : null}&nbsp;
-        <button onClick={() => dispatch(deleteEmployee(empId))}>Delete</button>
+        <button
+          className="table__row-action table__row-action-delete"
+          onClick={handleDeleteOrCancelClick}
+        >
+          {editMode ? "Cancel" : "Delete"}
+        </button>
       </td>
     </tr>
   );

@@ -32,3 +32,19 @@
   padding: 0px 8px;
   transition: none;
 }
+
+.table__row-action {
+  border: none;
+  outline: none;
+  color: #ffffff;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.table__row-action-edit {
+  background-color: #2196f3;
+}
+
+.table__row-action-delete {
+  background-color: #e12b2b;
+}
