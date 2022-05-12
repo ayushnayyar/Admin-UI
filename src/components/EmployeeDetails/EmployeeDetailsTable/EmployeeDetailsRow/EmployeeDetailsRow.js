@@ -26,12 +26,18 @@ const EmployeeDetailsRow = ({
     email: empEmail,
     role: empRole,
   });
+  const [tempFormData, setTempFormData] = useState(formData);
 
   const handleEditClick = () => {
-    console.log("Edit/Save clicked");
     if (editMode) {
       dispatch(editEmployee(formData));
     }
+    setTempFormData(formData);
+    setEditMode(!editMode);
+  };
+
+  const handleCancel = () => {
+    setFormData(tempFormData);
     setEditMode(!editMode);
   };
 
@@ -83,7 +89,9 @@ const EmployeeDetailsRow = ({
         />
       </td>
       <td className="table__row-action table__row-padding">
-        <button onClick={handleEditClick}>{editMode ? "Save" : "Edit"}</button>{" "}
+        <button onClick={handleEditClick}>{editMode ? "Save" : "Edit"}</button>
+        &nbsp;
+        {editMode ? <button onClick={handleCancel}>Cancel</button> : null}&nbsp;
         <button onClick={() => dispatch(deleteEmployee(empId))}>Delete</button>
       </td>
     </tr>
