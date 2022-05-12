@@ -2,6 +2,7 @@
 
 table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 th {
@@ -14,5 +15,5 @@ th {
 td {
   padding: 12px 8px;
   width: 20%;
-  border-bottom: $border;
+  border-top: $border;
 }

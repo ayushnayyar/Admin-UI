@@ -23,6 +23,7 @@
 }
 
 .pagination__button__active {
+  transition: 0.2s ease;
   background-color: #ffffff;
   color: #2196f3;
 }

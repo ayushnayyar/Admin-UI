@@ -142,6 +142,7 @@ const EmployeeDetails = ({ employees, searchText }) => {
         allChecked={allChecked}
         handleCheck={handleCheck}
         handleAllChecked={handleAllChecked}
+        selectedEmployeeIds={selectedEmployeeIds}
       />
       <PaginationBar
         page={page}

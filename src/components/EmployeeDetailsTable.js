@@ -8,6 +8,7 @@ const EmployeeDetailsTable = ({
   allChecked,
   handleAllChecked,
   handleCheck,
+  selectedEmployeeIds,
 }) => {
   return (
     <table>
@@ -41,6 +42,7 @@ const EmployeeDetailsTable = ({
               empEmail={email}
               checked={checked}
               handleCheck={handleCheck}
+              selectedEmployeeIds={selectedEmployeeIds}
             />
           );
         })}

@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteEmployee } from "../actions/employees";
 
+import "../styles/employee-details-row.scss";
+
 const EmployeeDetailsRow = ({
   empId,
   index,
@@ -10,11 +12,16 @@ const EmployeeDetailsRow = ({
   empEmail,
   checked,
   handleCheck,
+  selectedEmployeeIds,
 }) => {
   const dispatch = useDispatch();
 
   return (
-    <tr>
+    <tr
+      className={`${
+        selectedEmployeeIds.includes(empId) ? "table__row-selected" : ""
+      }`}
+    >
       <td>
         <input
           key={`empId-${checked[index] ? "checked" : "not-checked"}`}
