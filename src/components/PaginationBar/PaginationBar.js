@@ -18,6 +18,7 @@ const PaginationBar = ({
     <div className="pagination__bar">
       <button
         disabled={checked.filter((check) => check === true).length === 0}
+        className="pagination__delete-button"
         onClick={deleteSelected}
       >
         Delete Selected

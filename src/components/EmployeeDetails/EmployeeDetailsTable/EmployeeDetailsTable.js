@@ -1,6 +1,7 @@
 import React from "react";
+import EmployeeDetailsRow from "./EmployeeDetailsRow";
 
-import EmployeeDetailsRow from "../EmployeeDetailsRow";
+import "./employee-details-table.scss";
 
 const EmployeeDetailsTable = ({
   paginatedData,
@@ -14,17 +15,17 @@ const EmployeeDetailsTable = ({
     <table>
       <thead>
         <tr>
-          <th>
+          <th className="table__head-checkbox">
             <input
               type="checkbox"
               checked={allChecked}
               onChange={handleAllChecked}
             />
           </th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
+          <th className="table__head-name">Name</th>
+          <th className="table__head-email">Email</th>
+          <th className="table__head-role">Role</th>
+          <th className="table__head-actions">Actions</th>
         </tr>
       </thead>
       <tbody>

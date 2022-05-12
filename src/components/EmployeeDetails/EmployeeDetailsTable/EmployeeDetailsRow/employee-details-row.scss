@@ -1,0 +1,34 @@
+@import "../../../../constants/constants.scss";
+
+.table__row-selected {
+  background-color: $secondary-text;
+}
+
+.table__row-checkbox {
+  width: 10%;
+}
+
+.table__row-name {
+  width: 20%;
+}
+
+.table__row-email {
+  width: 30%;
+}
+
+.table__row-role {
+  width: 15%;
+}
+
+.table__row-actions {
+  width: 15%;
+}
+
+.table__row-padding {
+  padding: 12px 8px;
+}
+
+.table__row-edit-padding {
+  padding: 0px 8px;
+  transition: none;
+}
