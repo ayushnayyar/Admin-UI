@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { DISPLAY } from "../../../../../constants/strings";
 
 import "./employee-details-data.scss";
 
-const EmployeeDetailsData = ({ mode = DISPLAY, data }) => {
-  const [inputValue, setInputValue] = useState(data);
-
+const EmployeeDetailsData = ({ mode = DISPLAY, data, updateValue }) => {
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    const newValue = event.target.value;
+    updateValue(newValue);
   };
 
   return (
@@ -18,7 +17,7 @@ const EmployeeDetailsData = ({ mode = DISPLAY, data }) => {
         <div>
           <input
             type="text"
-            value={inputValue}
+            value={data}
             onChange={handleInputChange}
             className="table__data-input"
           />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteEmployee } from "../../../../actions/employees";
+import { deleteEmployee, editEmployee } from "../../../../actions/employees";
 import EmployeeDetailsData from "./EmployeeDetailsData";
 import { EDIT, DISPLAY } from "../../../../constants/strings";
 
@@ -21,12 +21,19 @@ const EmployeeDetailsRow = ({
 
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
+    id: empId,
     name: empName,
     email: empEmail,
     role: empRole,
   });
 
-  const handleSave = () => {};
+  const handleEditClick = () => {
+    console.log("Edit/Save clicked");
+    if (editMode) {
+      dispatch(editEmployee(formData));
+    }
+    setEditMode(!editMode);
+  };
 
   return (
     <tr className={`${isSelected ? "table__row-selected" : ""}`}>
@@ -45,26 +52,38 @@ const EmployeeDetailsRow = ({
           editMode ? "table__row-edit-padding" : "table__row-padding"
         }`}
       >
-        <EmployeeDetailsData mode={editMode ? EDIT : DISPLAY} data={empName} />
+        <EmployeeDetailsData
+          mode={editMode ? EDIT : DISPLAY}
+          data={formData.name}
+          updateValue={(newName) => setFormData({ ...formData, name: newName })}
+        />
       </td>
       <td
         className={`table__row-email  ${
           editMode ? "table__row-edit-padding" : "table__row-padding"
         }`}
       >
-        <EmployeeDetailsData mode={editMode ? EDIT : DISPLAY} data={empEmail} />
+        <EmployeeDetailsData
+          mode={editMode ? EDIT : DISPLAY}
+          data={formData.email}
+          updateValue={(newEmail) =>
+            setFormData({ ...formData, email: newEmail })
+          }
+        />
       </td>
       <td
         className={`table__row-role ${
           editMode ? "table__row-edit-padding" : "table__row-padding"
         }`}
       >
-        <EmployeeDetailsData mode={editMode ? EDIT : DISPLAY} data={empRole} />
+        <EmployeeDetailsData
+          mode={editMode ? EDIT : DISPLAY}
+          data={formData.role}
+          updateValue={(newRole) => setFormData({ ...formData, role: newRole })}
+        />
       </td>
       <td className="table__row-action table__row-padding">
-        <button onClick={() => setEditMode(!editMode)}>
-          {editMode ? "Save" : "Edit"}
-        </button>{" "}
+        <button onClick={handleEditClick}>{editMode ? "Save" : "Edit"}</button>{" "}
         <button onClick={() => dispatch(deleteEmployee(empId))}>Delete</button>
       </td>
     </tr>
