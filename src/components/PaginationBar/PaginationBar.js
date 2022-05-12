@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/pagination-bar.scss";
+import "./pagination-bar.scss";
 
 const PaginationBar = ({
   paginationGroup,

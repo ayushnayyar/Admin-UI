@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteEmployee } from "../actions/employees";
+import { deleteEmployee } from "../../../actions/employees";
 
-import "../styles/employee-details-row.scss";
+import "./employee-details-row.scss";
 
 const EmployeeDetailsRow = ({
   empId,

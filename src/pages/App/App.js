@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../components/SearchBar";
-import EmployeeDetails from "../components/EmployeeDetails";
+import SearchBar from "../../components/SearchBar";
+import EmployeeDetails from "../../components/EmployeeDetails";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getEmployees } from "../actions/employees";
-import "../styles/app.scss";
+import { getEmployees } from "../../actions/employees";
+import "./app.scss";
 
 const App = () => {
   const dispatch = useDispatch();

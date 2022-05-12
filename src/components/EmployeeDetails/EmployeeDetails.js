@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { batchDeleteEmployees } from "../actions/employees";
-import EmployeeDetailsTable from "./EmployeeDetailsTable";
-import PaginationBar from "./PaginationBar";
+import { batchDeleteEmployees } from "../../actions/employees";
+import EmployeeDetailsTable from "./EmployeeDetailsTable/EmployeeDetailsTable";
+import PaginationBar from "../PaginationBar/PaginationBar";
 
-import "../styles/employee-details.scss";
+import "./employee-details.scss";
 
 const pageDataLimit = 10;
 const paginationLimit = 5;
@@ -13,6 +13,18 @@ const paginationLimit = 5;
 const EmployeeDetails = ({ employees, searchText }) => {
   const dispatch = useDispatch();
   const initialCheckBoxState = Array(pageDataLimit).fill(false);
+
+  /*
+    STATE VARIABLES
+    
+    - filteredEmployees => Keeps track of all employees
+    - paginatedData => Keeps track of employees to display on the current page
+    - paginationGroup => Determines the number of pages to paginate and display
+    - page => Keeps track of current page number
+    - checked => Keeps track of employees selected currently 
+    - allChecked => Keeps track if all employees are selected
+    - selectedEmployeeIds => Keeps track of all selected employee ids
+  */
 
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [paginatedData, setPaginatedData] = useState([]);
@@ -63,6 +75,11 @@ const EmployeeDetails = ({ employees, searchText }) => {
     );
     setChecked(updatedCheckedState);
 
+    handleEmployeeCheckboxClick(event);
+  };
+
+  // Add employee id of selected employee or remove when un-selected
+  const handleEmployeeCheckboxClick = (event) => {
     if (!selectedEmployeeIds.includes(event.target.value)) {
       setSelectedEmployeeIds([...selectedEmployeeIds, event.target.value]);
     } else {
@@ -72,6 +89,7 @@ const EmployeeDetails = ({ employees, searchText }) => {
     }
   };
 
+  // Handle click of checkbox to select/unselect all
   const handleAllChecked = () => {
     setChecked(Array(pageDataLimit).fill(!allChecked));
     setAllChecked(!allChecked);
@@ -126,6 +144,7 @@ const EmployeeDetails = ({ employees, searchText }) => {
     setAllChecked(areAllChecked);
   }, [checked]);
 
+  // Handle employee id state when all employees are selected/unselected
   useEffect(() => {
     if (allChecked) {
       setSelectedEmployeeIds(paginatedData.map((employee) => employee.id));

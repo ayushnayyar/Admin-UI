@@ -1,6 +1,6 @@
 import React from "react";
 
-import EmployeeDetailsRow from "./EmployeeDetailsRow";
+import EmployeeDetailsRow from "../EmployeeDetailsRow";
 
 const EmployeeDetailsTable = ({
   paginatedData,

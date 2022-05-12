@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/search-bar.scss";
+import "./search-bar.scss";
 
 const SearchBar = ({ searchText, setSearchTerm }) => {
   const handleSearchTextChange = (event) => {
