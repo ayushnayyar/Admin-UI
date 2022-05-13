@@ -1,5 +1,6 @@
 import React from "react";
 import EmployeeDetailsRow from "./EmployeeDetailsRow";
+import Checkbox from "./Checkbox";
 
 import "./employee-details-table.scss";
 
@@ -16,8 +17,8 @@ const EmployeeDetailsTable = ({
       <thead>
         <tr>
           <th className="table__head-checkbox">
-            <input
-              type="checkbox"
+            <Checkbox
+              value={"Select All"}
               checked={allChecked}
               onChange={handleAllChecked}
             />

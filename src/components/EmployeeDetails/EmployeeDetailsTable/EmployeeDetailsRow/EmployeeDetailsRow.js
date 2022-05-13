@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteEmployee, editEmployee } from "../../../../actions/employees";
 import EmployeeDetailsData from "./EmployeeDetailsData";
+import ActionButton from "./ActionButton";
 import { EDIT, DISPLAY } from "../../../../constants/strings";
 
 import "./employee-details-row.scss";
+import Checkbox from "../Checkbox";
 
 const EmployeeDetailsRow = ({
   empId,
@@ -48,10 +50,7 @@ const EmployeeDetailsRow = ({
   return (
     <tr className={`${isSelected ? "table__row-selected" : ""}`}>
       <td className="table__row-checkbox table__row-padding">
-        <input
-          key={`empId-${checked[index] ? "checked" : "not-checked"}`}
-          type="checkbox"
-          name={empId}
+        <Checkbox
           value={empId}
           checked={checked[index]}
           onChange={(event) => handleCheck(event, index)}
@@ -93,19 +92,17 @@ const EmployeeDetailsRow = ({
         />
       </td>
       <td className="table__row-actions table__row-padding">
-        <button
-          className={"table__row-action table__row-action-edit"}
+        <ActionButton
+          text={editMode ? "Save" : "Edit"}
+          classNames={"table__row-action table__row-action-edit"}
           onClick={handleEditOrSaveClick}
-        >
-          {editMode ? "Save" : "Edit"}
-        </button>
+        />
         &nbsp;
-        <button
-          className="table__row-action table__row-action-delete"
+        <ActionButton
+          text={editMode ? "Cancel" : "Delete"}
+          classNames={"table__row-action table__row-action-delete"}
           onClick={handleDeleteOrCancelClick}
-        >
-          {editMode ? "Cancel" : "Delete"}
-        </button>
+        />
       </td>
     </tr>
   );
