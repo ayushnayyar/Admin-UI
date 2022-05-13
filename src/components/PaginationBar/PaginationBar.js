@@ -23,7 +23,7 @@ const PaginationBar = ({
   deleteSelected,
 }) => {
   return (
-    <div className="pagination__bar">
+    <div className="pagination__bar" data-testid="pagination-bar">
       <PaginationButton
         text={deleteSelectedButtonText}
         disabled={checked.filter((check) => check === true).length === 0}
