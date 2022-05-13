@@ -1,2 +1,11 @@
 export const EDIT = "EDIT";
 export const DISPLAY = "DISPLAY";
+export const editButtonText = "Edit";
+export const saveButtonText = "Save";
+export const cancelButtonText = "Cancel";
+export const deleteButtonText = "Delete";
+export const deleteSelectedButtonText = "Delete Selected";
+export const goToFirstPageText = "<<";
+export const goToPreviousPageText = "<";
+export const goToLastPageText = ">>";
+export const goToNextPageText = ">";

@@ -1,4 +1,12 @@
 import React from "react";
+import PaginationButton from "./PaginationButton";
+import {
+  deleteSelectedButtonText,
+  goToFirstPageText,
+  goToPreviousPageText,
+  goToNextPageText,
+  goToLastPageText,
+} from "../../constants/strings";
 
 import "./pagination-bar.scss";
 
@@ -16,57 +24,52 @@ const PaginationBar = ({
 }) => {
   return (
     <div className="pagination__bar">
-      <button
+      <PaginationButton
+        text={deleteSelectedButtonText}
         disabled={checked.filter((check) => check === true).length === 0}
-        className="pagination__delete-button"
+        classNames={"pagination__delete-button"}
         onClick={deleteSelected}
-      >
-        Delete Selected
-      </button>
+      />
       <div className="pagination__buttons">
-        <button
+        <PaginationButton
+          text={goToFirstPageText}
           disabled={page === 1}
-          className="pagination__button"
+          classNames={"pagination__button"}
           onClick={goToFirstPage}
-        >
-          {"<<"}
-        </button>
-        <button
+        />
+        <PaginationButton
+          text={goToPreviousPageText}
           disabled={page === 1}
-          className="pagination__button"
+          classNames={"pagination__button"}
           onClick={goToPreviousPage}
-        >
-          {"<"}
-        </button>
+        />
         {paginationGroup.map((pageIndex) => {
+          const activeClassnameEnabled =
+            page === pageIndex ? "pagination__button__active" : "";
           return (
-            <button
-              className={`pagination__button ${
-                page === pageIndex ? "pagination__button__active" : ""
-              }`}
+            <PaginationButton
               key={pageIndex}
+              text={pageIndex}
+              classNames={`pagination__button ${activeClassnameEnabled}`}
               onClick={(event) => {
                 changePage(event);
               }}
-            >
-              {pageIndex}
-            </button>
+              disabled={pageIndex > lastPage || pageIndex < 1}
+            />
           );
         })}
-        <button
+        <PaginationButton
+          text={goToNextPageText}
           disabled={page === lastPage}
-          className="pagination__button"
+          classNames={"pagination__button"}
           onClick={goToNextPage}
-        >
-          {">"}
-        </button>
-        <button
+        />
+        <PaginationButton
+          text={goToLastPageText}
           disabled={page === lastPage}
-          className="pagination__button"
+          classNames={"pagination__button"}
           onClick={goToLastPage}
-        >
-          {">>"}
-        </button>
+        />
       </div>
       <div className="pagination__spacer"></div>
     </div>

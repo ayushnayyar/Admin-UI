@@ -3,10 +3,17 @@ import { useDispatch } from "react-redux";
 import { deleteEmployee, editEmployee } from "../../../../actions/employees";
 import EmployeeDetailsData from "./EmployeeDetailsData";
 import ActionButton from "./ActionButton";
-import { EDIT, DISPLAY } from "../../../../constants/strings";
+import Checkbox from "../Checkbox";
+import {
+  EDIT,
+  DISPLAY,
+  saveButtonText,
+  editButtonText,
+  cancelButtonText,
+  deleteButtonText,
+} from "../../../../constants/strings";
 
 import "./employee-details-row.scss";
-import Checkbox from "../Checkbox";
 
 const EmployeeDetailsRow = ({
   empId,
@@ -93,13 +100,13 @@ const EmployeeDetailsRow = ({
       </td>
       <td className="table__row-actions table__row-padding">
         <ActionButton
-          text={editMode ? "Save" : "Edit"}
+          text={editMode ? saveButtonText : editButtonText}
           classNames={"table__row-action table__row-action-edit"}
           onClick={handleEditOrSaveClick}
         />
         &nbsp;
         <ActionButton
-          text={editMode ? "Cancel" : "Delete"}
+          text={editMode ? cancelButtonText : deleteButtonText}
           classNames={"table__row-action table__row-action-delete"}
           onClick={handleDeleteOrCancelClick}
         />
