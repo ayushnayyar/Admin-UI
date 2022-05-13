@@ -9,3 +9,4 @@ export const goToFirstPageText = "<<";
 export const goToPreviousPageText = "<";
 export const goToLastPageText = ">>";
 export const goToNextPageText = ">";
+export const searchBarPlaceholderText = "Search by name, email or role";

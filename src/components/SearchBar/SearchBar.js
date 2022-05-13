@@ -1,4 +1,5 @@
 import React from "react";
+import { searchBarPlaceholderText } from "../../constants/strings";
 
 import "./search-bar.scss";
 
@@ -14,7 +15,7 @@ const SearchBar = ({ searchText, setSearchTerm }) => {
         value={searchText}
         onChange={handleSearchTextChange}
         type="search"
-        placeholder="Search by name, email or role"
+        placeholder={searchBarPlaceholderText}
       ></input>
     </div>
   );
