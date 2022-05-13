@@ -68,7 +68,7 @@ const PaginationBar = ({
           {">>"}
         </button>
       </div>
-      <div></div>
+      <div className="pagination__spacer"></div>
     </div>
   );
 };

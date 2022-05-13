@@ -1,9 +1,18 @@
 @import "../../constants/constants.scss";
 
+.table__wrapper {
+  overflow-x: auto;
+}
+
 table {
   font-size: 14px;
   width: 100%;
   border-collapse: collapse;
+  min-width: 800px;
+
+  @media (max-width: 720px) {
+    font-size: 12px;
+  }
 }
 
 th {

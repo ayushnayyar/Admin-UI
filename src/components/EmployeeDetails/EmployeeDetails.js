@@ -154,7 +154,7 @@ const EmployeeDetails = ({ employees, searchText }) => {
   }, [paginatedData, allChecked]);
 
   return (
-    <div>
+    <div className="table__wrapper">
       <EmployeeDetailsTable
         paginatedData={paginatedData}
         checked={checked}
